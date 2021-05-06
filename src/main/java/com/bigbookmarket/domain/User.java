@@ -15,8 +15,8 @@ import javax.persistence.*;
 public class User {
     @Id
     @Column(columnDefinition = "BIGINT")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long userId;
 
     @Column(columnDefinition = "CHAR(10)", nullable = false)
     private String id;
@@ -27,6 +27,6 @@ public class User {
     @Column(columnDefinition = "CHAR(11)", nullable = false)
     private String phone;
 
-    @Column(columnDefinition = "CHAR(10)", nullable = false, unique=true)
+    @Column(columnDefinition = "CHAR(10)", nullable = false, unique = true)
     private String nickname;
 }
