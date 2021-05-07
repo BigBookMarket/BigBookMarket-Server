@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface BookRepository extends JpaRepository<Book, String> {
 
-    @Query("SELECT DISTINCT b.category FROM Book b ORDER BY b.category")
+    @Query(value = "SELECT DISTINCT b.category FROM book b ORDER BY b.category", nativeQuery = true)
     List<String> findCategory();
 }
