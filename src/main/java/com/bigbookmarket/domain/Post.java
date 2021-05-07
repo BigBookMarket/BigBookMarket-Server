@@ -27,6 +27,7 @@ public class Post extends BaseTimeEntity {
     @JoinColumn(name = "bookId", referencedColumnName = "bookId")
     private Book book;
 
+    // TODO: enum으로 관리?
     @Column(columnDefinition = "TINYINT", nullable = false)
     private Byte category;
 
