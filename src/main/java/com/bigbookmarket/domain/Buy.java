@@ -12,8 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-
-public class Buy extends BaseTimeEntity{
+public class Buy extends BaseTimeEntity {
 
     @Id
     @Column(columnDefinition = "BIGINT")

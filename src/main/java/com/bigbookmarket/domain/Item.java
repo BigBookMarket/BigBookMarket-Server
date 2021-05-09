@@ -28,14 +28,14 @@ public class Item {
     private User user;
 
     @Column(columnDefinition = "MEDIUMINT", nullable = false)
-    private Long price;
+    private Integer price;
 
     @Column(columnDefinition = "TINYINT", nullable = false)
-    private Byte method;
+    private ItemTradingMethod method;
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String detail;
 
     @Column(columnDefinition = "TINYINT default 0", nullable = false)
-    private Byte status;
+    private ItemTradingStatus status;
 }

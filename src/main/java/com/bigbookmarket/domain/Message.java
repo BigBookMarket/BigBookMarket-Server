@@ -21,11 +21,11 @@ public class Message extends BaseTimeEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "senderId", referencedColumnName = "userId")
-    private User user;
+    private User sender;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "receiverId", referencedColumnName = "userId")
-    private User user2;
+    private User receiver;
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
