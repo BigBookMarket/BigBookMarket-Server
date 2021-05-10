@@ -15,8 +15,16 @@ public class BookService {
 
     private final BookRepository bookRepository;
 
+    @Transactional(readOnly = true)
     public List<BookListResponseDto> findAll() {
         return bookRepository.findAll().stream()
+                .map(BookListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<BookListResponseDto> findByCategory(String category) {
+        return bookRepository.findByCategory(category).stream()
                 .map(BookListResponseDto::new)
                 .collect(Collectors.toList());
     }
