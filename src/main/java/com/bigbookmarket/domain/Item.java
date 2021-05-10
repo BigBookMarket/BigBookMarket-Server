@@ -30,6 +30,10 @@ public class Item {
     @Column(columnDefinition = "MEDIUMINT", nullable = false)
     private Integer price;
 
+//    @Column(columnDefinition = "TINYINT", nullable = false)
+//    private ItemTradingMethod method;
+
+    @Enumerated
     @Column(columnDefinition = "TINYINT", nullable = false)
     private ItemTradingMethod method;
 
