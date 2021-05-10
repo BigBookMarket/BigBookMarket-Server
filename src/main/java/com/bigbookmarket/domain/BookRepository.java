@@ -10,7 +10,6 @@ public interface BookRepository extends JpaRepository<Book, String> {
     @Query(value = "SELECT * FROM book", nativeQuery = true)
     List<Book> findAll();
 
-    // TODO: Native Query로 수정
     List<Book> findByCategory(String category);
 
     @Query(value = "SELECT DISTINCT b.category FROM book b ORDER BY b.category", nativeQuery = true)
