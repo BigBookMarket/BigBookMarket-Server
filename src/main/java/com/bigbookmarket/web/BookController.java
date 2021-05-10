@@ -1,6 +1,7 @@
 package com.bigbookmarket.web;
 
 import com.bigbookmarket.service.BookService;
+import com.bigbookmarket.web.dto.BookListResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,13 @@ import static org.springframework.http.HttpStatus.OK;
 public class BookController {
 
     private final BookService bookService;
+
+    @GetMapping
+    public ResponseEntity findAll() {
+        List<BookListResponseDto> list = bookService.findAll();
+        return ResponseEntity.status(OK).body(list);
+    }
+
 
     @GetMapping("/category")
     public ResponseEntity<List<String>> findCategory() {
