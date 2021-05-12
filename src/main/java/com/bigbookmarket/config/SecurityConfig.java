@@ -4,7 +4,6 @@ import com.bigbookmarket.security.JwtAuthenticationFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -36,7 +35,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/auth/**")
                 .permitAll()
-                .antMatchers(HttpMethod.GET, "/book/**")
+                .antMatchers("/book/**")
+                .permitAll()
+                .antMatchers("/post/**")
                 .permitAll()
                 .antMatchers("/v2/api-docs",
                         "/configuration/ui",
