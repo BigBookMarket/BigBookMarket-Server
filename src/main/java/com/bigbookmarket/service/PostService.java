@@ -40,7 +40,7 @@ public class PostService {
     }
 
     @Transactional(readOnly = true)
-    public PostResponse findByPostId(Long id) {
+    public PostResponse read(Long id) {
         Post entity = postRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("3 해당 글이 없습니다. id=" + id));
 
@@ -61,12 +61,4 @@ public class PostService {
                 .map(PostListResponse::new)
                 .collect(Collectors.toList());
     }
-
-    //오류
-    /*@Transactional(readOnly = true)
-    public List<PostListResponse> findById2(Long id) {
-        return postRepository.findById2(id).stream()
-                .map(PostListResponse::new)
-                .collect(Collectors.toList());
-    }*/
 }

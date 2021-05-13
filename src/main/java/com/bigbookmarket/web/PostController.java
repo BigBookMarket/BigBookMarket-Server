@@ -3,12 +3,9 @@ package com.bigbookmarket.web;
 import com.bigbookmarket.service.PostService;
 import com.bigbookmarket.web.dto.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("/post")
@@ -39,14 +36,8 @@ public class PostController {
     }
 
     @GetMapping("/{id}")
-    public PostResponse findByPostId(@PathVariable Long id) {
-        return postService.findByPostId(id);
+    public PostResponse read(@PathVariable Long id) {
+        return postService.read(id);
     }
-
-    /*@GetMapping("/{id}") // 오류
-    public PostResponse findByUserId(@PathVariable Long id) {
-        return postService.findByUserId(id);
-    }
-*/
 }
 
