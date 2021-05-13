@@ -1,5 +1,6 @@
 package com.bigbookmarket.domain;
 
+import com.bigbookmarket.web.dto.PostUpdateRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,4 +30,5 @@ public class Message extends BaseTimeEntity {
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
+
 }

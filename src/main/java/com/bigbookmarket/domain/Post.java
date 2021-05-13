@@ -36,5 +36,11 @@ public class Post extends BaseTimeEntity {
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
+
+
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
 }
 
