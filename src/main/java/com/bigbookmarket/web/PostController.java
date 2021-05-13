@@ -39,8 +39,14 @@ public class PostController {
     }
 
     @GetMapping("/{id}")
-    public PostResponse findById(@PathVariable Long id) {
-        return postService.findById(id);
+    public PostResponse findByPostId(@PathVariable Long id) {
+        return postService.findByPostId(id);
     }
 
+    /*@GetMapping("/{id}") // 오류
+    public PostResponse findByUserId(@PathVariable Long id) {
+        return postService.findByUserId(id);
+    }
+*/
 }
+

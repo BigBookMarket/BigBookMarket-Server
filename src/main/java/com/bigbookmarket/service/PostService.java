@@ -4,14 +4,11 @@ import com.bigbookmarket.domain.Post;
 import com.bigbookmarket.domain.PostRepository;
 import com.bigbookmarket.web.dto.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static org.springframework.http.HttpStatus.OK;
 
 @RequiredArgsConstructor
 @Service
@@ -43,9 +40,17 @@ public class PostService {
     }
 
     @Transactional(readOnly = true)
-    public PostResponse findById(Long id) {
+    public PostResponse findByPostId(Long id) {
         Post entity = postRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("3 해당 사용자가 없습니다. id=" + id));
+                .orElseThrow(() -> new IllegalArgumentException("3 해당 글이 없습니다. id=" + id));
+
+        return new PostResponse(entity);
+    }
+
+    @Transactional(readOnly = true)
+    public PostResponse findByUserId(Long id) {
+        Post entity = postRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("4 해당 사용자가 없습니다. id=" + id));
 
         return new PostResponse(entity);
     }
@@ -64,9 +69,4 @@ public class PostService {
                 .map(PostListResponse::new)
                 .collect(Collectors.toList());
     }*/
-
-    @Transactional(readOnly = true)
-    public List<String> findId() {
-        return postRepository.findId();
-    }
 }
