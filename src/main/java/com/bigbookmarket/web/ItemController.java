@@ -39,4 +39,9 @@ public class ItemController {
         return ResponseEntity.status(OK).body(item);
     }
 
+    @GetMapping("/list")
+    public ResponseEntity findAll() {
+        return ResponseEntity.status(OK).body(itemService.findAll());
+    }
+
 }

@@ -3,12 +3,16 @@ package com.bigbookmarket.service;
 import com.bigbookmarket.domain.BookRepository;
 import com.bigbookmarket.domain.Item;
 import com.bigbookmarket.domain.ItemRepository;
+import com.bigbookmarket.web.dto.ItemListResponseDto;
 import com.bigbookmarket.web.dto.ItemResponseDto;
 import com.bigbookmarket.web.dto.ItemSaveRequestDto;
 import com.bigbookmarket.web.dto.ItemUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -44,5 +48,12 @@ public class ItemService {
         Item entity = itemRepository.findById(itemId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 Item이 없습니다. itemId = " + itemId));
         return new ItemResponseDto(entity);
+    }
+
+    @Transactional(readOnly = true)
+    public List<ItemListResponseDto> findAll() {
+        return itemRepository.findAll().stream()
+                .map(ItemListResponseDto::new)
+                .collect(Collectors.toList());
     }
 }
