@@ -48,15 +48,7 @@ public class PostService {
     }
 
     @Transactional(readOnly = true)
-    public PostResponse findByUserId(Long id) {
-        Post entity = postRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("4 해당 사용자가 없습니다. id=" + id));
-
-        return new PostResponse(entity);
-    }
-
-    @Transactional(readOnly = true)
-    public List<PostListResponse> findAllDesc() {
+    public List<PostListResponse> listRead() {
         return postRepository.findAllDesc().stream()
                 .map(PostListResponse::new)
                 .collect(Collectors.toList());

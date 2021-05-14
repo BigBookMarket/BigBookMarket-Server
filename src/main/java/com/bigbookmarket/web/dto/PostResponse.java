@@ -16,10 +16,10 @@ public class PostResponse {
     private String content;
 
     public PostResponse(Post entity) {
-        this.postId = entity.getPostId();
-        this.user = entity.getUser();
-        this.book = entity.getBook();
-        this.category = entity.getCategory();
+        //this.postId = entity.getPostId();
+        //this.user = entity.getUser();
+        //this.book = entity.getBook();
+        //this.category = entity.getCategory();
         this.title = entity.getTitle();
         this.content = entity.getContent();
     }

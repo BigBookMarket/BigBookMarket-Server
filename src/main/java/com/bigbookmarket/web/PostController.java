@@ -14,11 +14,6 @@ public class PostController {
 
     private final PostService postService;
 
-    @GetMapping("/list")
-    public List<PostListResponse> findAllDesc() {
-        return postService.findAllDesc();
-    }
-
     @PostMapping
     public Long Create(@RequestBody PostCreateRequest requestDto) {
         return postService.Create(requestDto);
@@ -38,6 +33,11 @@ public class PostController {
     @GetMapping("/{id}")
     public PostResponse read(@PathVariable Long id) {
         return postService.read(id);
+    }
+
+    @GetMapping("/list")
+    public List<PostListResponse> listRead() {
+        return postService.listRead();
     }
 }
 
