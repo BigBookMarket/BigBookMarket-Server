@@ -1,6 +1,5 @@
 package com.bigbookmarket.domain;
 
-import com.bigbookmarket.web.dto.PostUpdateRequest;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;

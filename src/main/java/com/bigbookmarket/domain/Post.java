@@ -23,20 +23,19 @@ public class Post extends BaseTimeEntity {
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "bookId", referencedColumnName = "bookId")
     private Book book;
 
-    // TODO: enum으로 관리?
+    @Enumerated
     @Column(columnDefinition = "TINYINT", nullable = false)
-    private Byte category;
+    private PostCategory category;
 
     @Column(columnDefinition = "VARCHAR(100)", nullable = false)
     private String title;
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
-
 
     public void update(String title, String content) {
         this.title = title;

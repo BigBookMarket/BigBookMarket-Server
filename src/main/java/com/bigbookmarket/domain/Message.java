@@ -1,6 +1,5 @@
 package com.bigbookmarket.domain;
 
-import com.bigbookmarket.web.dto.PostUpdateRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
