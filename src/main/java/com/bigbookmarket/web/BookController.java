@@ -20,12 +20,6 @@ public class BookController {
 
     private final BookService bookService;
 
-    @GetMapping
-    public ResponseEntity findAll() {
-        List<BookListResponseDto> list = bookService.findAll();
-        return ResponseEntity.status(OK).body(list);
-    }
-
     @GetMapping("/{category}")
     public ResponseEntity findByCategory(@PathVariable String category) {
         List<BookListResponseDto> list = bookService.findByCategory(category);

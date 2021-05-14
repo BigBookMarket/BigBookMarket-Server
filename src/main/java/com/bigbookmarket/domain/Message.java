@@ -29,4 +29,5 @@ public class Message extends BaseTimeEntity {
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
+
 }
