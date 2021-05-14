@@ -1,13 +1,11 @@
 package com.bigbookmarket.web;
 
 import com.bigbookmarket.service.ItemService;
+import com.bigbookmarket.web.dto.ItemResponseDto;
 import com.bigbookmarket.web.dto.ItemSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.HttpStatus.OK;
 
@@ -21,6 +19,12 @@ public class ItemController {
     @PostMapping
     public ResponseEntity save(@RequestBody ItemSaveRequestDto requestDto) {
         return ResponseEntity.status(OK).body(itemService.save(requestDto));
+    }
+
+    @GetMapping("/{itemId}")
+    public ResponseEntity findByItemId(@PathVariable Long itemId) {
+        ItemResponseDto item = itemService.findByItemId(itemId);
+        return ResponseEntity.status(OK).body(item);
     }
 
 }
