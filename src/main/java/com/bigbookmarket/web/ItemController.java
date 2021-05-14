@@ -3,6 +3,7 @@ package com.bigbookmarket.web;
 import com.bigbookmarket.service.ItemService;
 import com.bigbookmarket.web.dto.ItemResponseDto;
 import com.bigbookmarket.web.dto.ItemSaveRequestDto;
+import com.bigbookmarket.web.dto.ItemUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,11 @@ public class ItemController {
     @PostMapping
     public ResponseEntity save(@RequestBody ItemSaveRequestDto requestDto) {
         return ResponseEntity.status(OK).body(itemService.save(requestDto));
+    }
+
+    @PutMapping("/{itemId}")
+    public ResponseEntity update(@PathVariable Long itemId, @RequestBody ItemUpdateRequestDto requestDto) {
+        return ResponseEntity.status(OK).body(itemService.update(itemId, requestDto));
     }
 
     @GetMapping("/{itemId}")

@@ -40,4 +40,10 @@ public class Item extends BaseTimeEntity {
     @Enumerated
     @Column(columnDefinition = "TINYINT default 0", nullable = false)
     private ItemTradingStatus status;
+
+    public void update(Integer price, ItemTradingMethod method, String detail) {
+        this.price = price;
+        this.method = method;
+        this.detail = detail;
+    }
 }
