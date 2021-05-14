@@ -27,6 +27,12 @@ public class ItemController {
         return ResponseEntity.status(OK).body(itemService.update(itemId, requestDto));
     }
 
+    @DeleteMapping("/{itemId}")
+    public ResponseEntity delete(@PathVariable Long itemId) {
+        itemService.delete(itemId);
+        return ResponseEntity.status(OK).body(itemId);
+    }
+
     @GetMapping("/{itemId}")
     public ResponseEntity findByItemId(@PathVariable Long itemId) {
         ItemResponseDto item = itemService.findByItemId(itemId);

@@ -32,6 +32,13 @@ public class ItemService {
         return itemId;
     }
 
+    @Transactional
+    public void delete(Long itemId) {
+        Item item = itemRepository.findById(itemId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 Item이 없습니다. itemId = " + itemId));
+        itemRepository.delete(item);
+    }
+
     @Transactional(readOnly = true)
     public ItemResponseDto findByItemId(Long itemId) {
         Item entity = itemRepository.findById(itemId)
