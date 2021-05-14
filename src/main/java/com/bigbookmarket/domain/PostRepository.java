@@ -7,9 +7,10 @@ import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    @Query(value = "SELECT p FROM post p ORDER BY p.postId DESC", nativeQuery = true)
+    // TODO: createdDate로 할지? modifiedDate로 할지?
+    @Query(value = "SELECT * FROM post p ORDER BY p.modified_date DESC", nativeQuery = true)
     List<Post> findAllDesc();
 
-    @Query(value = "SELECT p FROM post p ORDER BY p.postId DESC", nativeQuery = true)
-    List<Post> read();
+    @Query(value = "SELECT * FROM post p WHERE p.book_id = :bookId ORDER BY p.modified_date DESC", nativeQuery = true)
+    List<Post> findByBookId(String bookId);
 }

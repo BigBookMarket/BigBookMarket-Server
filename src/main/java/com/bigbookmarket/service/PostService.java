@@ -2,7 +2,10 @@ package com.bigbookmarket.service;
 
 import com.bigbookmarket.domain.Post;
 import com.bigbookmarket.domain.PostRepository;
-import com.bigbookmarket.web.dto.*;
+import com.bigbookmarket.web.dto.PostListResponseDto;
+import com.bigbookmarket.web.dto.PostResponseDto;
+import com.bigbookmarket.web.dto.PostSaveRequestDto;
+import com.bigbookmarket.web.dto.PostUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,48 +20,43 @@ public class PostService {
     private final PostRepository postRepository;
 
     @Transactional
-    public Long Create(PostCreateRequest requestDto) {
+    public Long save(PostSaveRequestDto requestDto) {
         return postRepository.save(requestDto.toEntity()).getPostId();
     }
 
     @Transactional
-    public Long update(Long id, PostUpdateRequest requestDto) {
-        Post post = postRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("1 해당 사용자가 없습니다. id=" + id));
-
+    public Long update(Long postId, PostUpdateRequestDto requestDto) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 Post가 없습니다. postId=" + postId));
         post.update(requestDto.getTitle(), requestDto.getContent());
-
-        return id;
+        return postId;
     }
 
     @Transactional
-    public void delete(Long id) {
-        Post post = postRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("2 해당 사용자가 없습니다. id=" + id));
-
+    public void delete(Long postId) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 Post가 없습니다. postId=" + postId));
         postRepository.delete(post);
     }
 
     @Transactional(readOnly = true)
-    public PostResponse read(Long id) {
-        Post entity = postRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("3 해당 글이 없습니다. id=" + id));
-
-        return new PostResponse(entity);
+    public PostResponseDto findById(Long postId) {
+        Post entity = postRepository.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 Post가 없습니다. postId=" + postId));
+        return new PostResponseDto(entity);
     }
 
     @Transactional(readOnly = true)
-    public PostResponse findByUserId(Long id) {
-        Post entity = postRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("4 해당 사용자가 없습니다. id=" + id));
-
-        return new PostResponse(entity);
-    }
-
-    @Transactional(readOnly = true)
-    public List<PostListResponse> findAllDesc() {
+    public List<PostListResponseDto> findAllDesc() {
         return postRepository.findAllDesc().stream()
-                .map(PostListResponse::new)
+                .map(PostListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<PostListResponseDto> findByBookId(String bookId) {
+        return postRepository.findByBookId(bookId).stream()
+                .map(PostListResponseDto::new)
                 .collect(Collectors.toList());
     }
 }
