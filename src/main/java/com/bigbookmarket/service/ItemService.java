@@ -56,4 +56,11 @@ public class ItemService {
                 .map(ItemListResponseDto::new)
                 .collect(Collectors.toList());
     }
+
+    @Transactional(readOnly = true)
+    public List<ItemListResponseDto> findByCategory(String category) {
+        return itemRepository.findByCategory(category).stream()
+                .map(ItemListResponseDto::new)
+                .collect(Collectors.toList());
+    }
 }

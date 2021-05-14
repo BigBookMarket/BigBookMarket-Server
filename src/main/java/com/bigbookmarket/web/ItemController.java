@@ -44,4 +44,8 @@ public class ItemController {
         return ResponseEntity.status(OK).body(itemService.findAll());
     }
 
+    @GetMapping("/list/{category}")
+    public ResponseEntity findByCategory(@PathVariable String category) {
+        return ResponseEntity.status(OK).body(itemService.findByCategory(category));
+    }
 }
