@@ -1,11 +1,9 @@
 package com.bigbookmarket.service;
 
+import com.bigbookmarket.domain.BookRepository;
 import com.bigbookmarket.domain.Post;
 import com.bigbookmarket.domain.PostRepository;
-import com.bigbookmarket.web.dto.PostListResponseDto;
-import com.bigbookmarket.web.dto.PostResponseDto;
-import com.bigbookmarket.web.dto.PostSaveRequestDto;
-import com.bigbookmarket.web.dto.PostUpdateRequestDto;
+import com.bigbookmarket.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +16,7 @@ import java.util.stream.Collectors;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final BookRepository bookRepository;
 
     @Transactional
     public Long save(PostSaveRequestDto requestDto) {
