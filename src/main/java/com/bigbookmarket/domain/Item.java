@@ -51,8 +51,13 @@ public class Item extends BaseTimeEntity {
         this.detail = detail;
     }
 
-    public void buy(User buyer) {
+    public void deal(User buyer) {
         this.buyer = buyer;
         this.status = ItemTradingStatus.DEAL;
+    }
+
+    public void cancel() {
+        this.buyer = null;
+        this.status = ItemTradingStatus.SALE;
     }
 }

@@ -39,9 +39,14 @@ public class ItemController {
         return ResponseEntity.status(OK).body(item);
     }
 
-    @PutMapping("/buy/{itemId}")
-    public ResponseEntity buy(@PathVariable Long itemId, @RequestBody String id) {
-        return ResponseEntity.status(OK).body(itemService.buy(itemId, id));
+    @PutMapping("/deal/{itemId}")
+    public ResponseEntity deal(@PathVariable Long itemId, @RequestBody String id) {
+        return ResponseEntity.status(OK).body(itemService.deal(itemId, id));
+    }
+
+    @PutMapping("/cancel/{itemId}")
+    public ResponseEntity cancel(@PathVariable Long itemId, @RequestBody String id) {
+        return ResponseEntity.status(OK).body(itemService.cancel(itemId, id));
     }
 
     @GetMapping("/list")
