@@ -1,6 +1,5 @@
 package com.bigbookmarket.service;
 
-import com.bigbookmarket.domain.BookRepository;
 import com.bigbookmarket.domain.Post;
 import com.bigbookmarket.domain.PostRepository;
 import com.bigbookmarket.web.dto.*;
@@ -8,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 public class PostService {
 
     private final PostRepository postRepository;
-    private final BookRepository bookRepository;
 
     @Transactional
     public Long save(PostSaveRequestDto requestDto) {
@@ -46,16 +45,15 @@ public class PostService {
     }
 
     @Transactional(readOnly = true)
-    public List<PostListResponseDto> findAllDesc() {
-        return postRepository.findAllDesc().stream()
-                .map(PostListResponseDto::new)
+    public List<PostHistoryListResponseDto> findByUserId(Long userId) {
+        return postRepository.findByUserId(userId).stream()
+                .map(PostHistoryListResponseDto::new)
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
-    public List<PostListResponseDto> findByBookId(String bookId) {
-        return postRepository.findByBookId(bookId).stream()
-                .map(PostListResponseDto::new)
-                .collect(Collectors.toList());
+    public PostListResponseDto findByBookId(String bookId) {
+        List<Post> entity = new ArrayList<>(postRepository.findByBookId(bookId));
+        return new PostListResponseDto(entity);
     }
 }
