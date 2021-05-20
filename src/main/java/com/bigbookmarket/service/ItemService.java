@@ -66,13 +66,23 @@ public class ItemService {
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 Item이 없습니다. itemId = " + itemId));
         if (id.equals(item.getSeller().getId())) {
-            // TODO: 판매자가 취소한 경우 구매자에게 취소쪽지 발송
+            // TODO: 판매자가 취소한 경우 구매자에게 취소 쪽지 발송
             log.info("구매자 " + item.getBuyer().getId() + "에게 취소쪽지 발송");
         } else {
-            // TODO: 구매자가 취소한 경우 판매자에게 취소쪽지 발송
+            // TODO: 구매자가 취소한 경우 판매자에게 취소 쪽지 발송
             log.info("판매자 " + item.getSeller().getId() + "에게 취소쪽지 발송");
         }
         item.cancel();
+        return itemId;
+    }
+
+    @Transactional
+    public Long sold(Long itemId) {
+        Item item = itemRepository.findById(itemId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 Item이 없습니다. itemId = " + itemId));
+        // TODO: 판매자에게 거래 완료 쪽지 발송
+        log.info("판매자 " + item.getSeller().getId() + "에게 거래 완료 쪽지 발송");
+        item.sold();
         return itemId;
     }
 

@@ -49,6 +49,11 @@ public class ItemController {
         return ResponseEntity.status(OK).body(itemService.cancel(itemId, id));
     }
 
+    @PutMapping("/sold/{itemId}")
+    public ResponseEntity sold(@PathVariable Long itemId) {
+        return ResponseEntity.status(OK).body(itemService.sold(itemId));
+    }
+
     @GetMapping("/list")
     public ResponseEntity findAll() {
         return ResponseEntity.status(OK).body(itemService.findAll());
