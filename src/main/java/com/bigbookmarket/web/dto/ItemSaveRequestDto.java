@@ -12,6 +12,7 @@ public class ItemSaveRequestDto {
     private Long sellerId;
     private Integer price;
     private ItemTradingMethod method;
+    private ItemTradingStatus status;
     private String detail;
 
     public Item toEntity() {
@@ -20,6 +21,7 @@ public class ItemSaveRequestDto {
                 .user(User.builder().userId(sellerId).build())
                 .price(price)
                 .method(method)
+                .status(status)
                 .detail(detail)
                 .status(ItemTradingStatus.SALE)
                 .build();
