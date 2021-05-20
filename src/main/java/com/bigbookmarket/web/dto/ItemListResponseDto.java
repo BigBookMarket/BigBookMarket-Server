@@ -11,7 +11,10 @@ public class ItemListResponseDto {
 
     private Long itemId;
     private Book book;
-    private String nickname;
+    private String sellerId;
+    private String sellerNickname;
+    private String buyerId;
+    private String buyerNickname;
     private Integer price;
     private ItemTradingMethod method;
     private ItemTradingStatus status;
@@ -20,7 +23,12 @@ public class ItemListResponseDto {
     public ItemListResponseDto(Item entity) {
         this.itemId = entity.getItemId();
         this.book = entity.getBook();
-        this.nickname = entity.getSeller().getNickname();
+        this.sellerId = entity.getSeller().getId();
+        this.sellerNickname = entity.getSeller().getNickname();
+        if (entity.getBuyer() != null) {
+            this.buyerId = entity.getBuyer().getId();
+            this.buyerNickname = entity.getBuyer().getNickname();
+        }
         this.price = entity.getPrice();
         this.method = entity.getMethod();
         this.status = entity.getStatus();
