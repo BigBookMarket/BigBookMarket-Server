@@ -1,8 +1,6 @@
 package com.bigbookmarket.service;
 
-import com.bigbookmarket.domain.BookRepository;
-import com.bigbookmarket.domain.Item;
-import com.bigbookmarket.domain.ItemRepository;
+import com.bigbookmarket.domain.*;
 import com.bigbookmarket.web.dto.ItemListResponseDto;
 import com.bigbookmarket.web.dto.ItemResponseDto;
 import com.bigbookmarket.web.dto.ItemSaveRequestDto;
@@ -18,6 +16,7 @@ import java.util.stream.Collectors;
 @Service
 public class ItemService {
 
+    private final UserRepository userRepository;
     private final BookRepository bookRepository;
     private final ItemRepository itemRepository;
 
@@ -48,6 +47,16 @@ public class ItemService {
         Item entity = itemRepository.findById(itemId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 Item이 없습니다. itemId = " + itemId));
         return new ItemResponseDto(entity);
+    }
+
+    @Transactional
+    public Long buy(Long itemId, String id) {
+        Item item = itemRepository.findById(itemId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 Item이 없습니다. itemId = " + itemId));
+        User buyer = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 User가 없습니다. id = " + id));
+        item.buy(buyer);
+        return itemId;
     }
 
     @Transactional(readOnly = true)

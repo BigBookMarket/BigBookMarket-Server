@@ -39,6 +39,11 @@ public class ItemController {
         return ResponseEntity.status(OK).body(item);
     }
 
+    @PutMapping("/buy/{itemId}")
+    public ResponseEntity buy(@PathVariable Long itemId, @RequestBody String id) {
+        return ResponseEntity.status(OK).body(itemService.buy(itemId, id));
+    }
+
     @GetMapping("/list")
     public ResponseEntity findAll() {
         return ResponseEntity.status(OK).body(itemService.findAll());

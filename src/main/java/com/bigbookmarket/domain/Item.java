@@ -50,4 +50,9 @@ public class Item extends BaseTimeEntity {
         this.method = method;
         this.detail = detail;
     }
+
+    public void buy(User buyer) {
+        this.buyer = buyer;
+        this.status = ItemTradingStatus.DEAL;
+    }
 }
