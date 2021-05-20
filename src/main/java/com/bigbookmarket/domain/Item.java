@@ -25,7 +25,11 @@ public class Item extends BaseTimeEntity {
 
     @ManyToOne
     @JoinColumn(name = "sellerId", referencedColumnName = "userId")
-    private User user;
+    private User seller;
+
+    @ManyToOne
+    @JoinColumn(name = "buyerId", referencedColumnName = "userId")
+    private User buyer;
 
     @Column(columnDefinition = "MEDIUMINT", nullable = false)
     private Integer price;

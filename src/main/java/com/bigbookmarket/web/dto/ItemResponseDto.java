@@ -21,8 +21,8 @@ public class ItemResponseDto {
     public ItemResponseDto(Item entity) {
         this.itemId = entity.getItemId();
         this.book = entity.getBook();
-        this.userId = entity.getUser().getUserId();
-        this.nickname = entity.getUser().getNickname();
+        this.userId = entity.getSeller().getUserId();
+        this.nickname = entity.getSeller().getNickname();
         this.price = entity.getPrice();
         this.method = entity.getMethod();
         this.status = entity.getStatus();

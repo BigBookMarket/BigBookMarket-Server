@@ -20,7 +20,7 @@ public class ItemListResponseDto {
     public ItemListResponseDto(Item entity) {
         this.itemId = entity.getItemId();
         this.book = entity.getBook();
-        this.nickname = entity.getUser().getNickname();
+        this.nickname = entity.getSeller().getNickname();
         this.price = entity.getPrice();
         this.method = entity.getMethod();
         this.status = entity.getStatus();

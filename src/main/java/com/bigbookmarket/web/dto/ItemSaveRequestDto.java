@@ -18,7 +18,7 @@ public class ItemSaveRequestDto {
     public Item toEntity() {
         return Item.builder()
                 .book(book)
-                .user(User.builder().userId(sellerId).build())
+                .seller(User.builder().userId(sellerId).build())
                 .price(price)
                 .method(method)
                 .status(status)
