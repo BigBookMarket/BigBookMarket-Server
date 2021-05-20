@@ -39,6 +39,21 @@ public class ItemController {
         return ResponseEntity.status(OK).body(item);
     }
 
+    @PutMapping("/deal/{itemId}")
+    public ResponseEntity deal(@PathVariable Long itemId, @RequestBody String id) {
+        return ResponseEntity.status(OK).body(itemService.deal(itemId, id));
+    }
+
+    @PutMapping("/cancel/{itemId}")
+    public ResponseEntity cancel(@PathVariable Long itemId, @RequestBody String id) {
+        return ResponseEntity.status(OK).body(itemService.cancel(itemId, id));
+    }
+
+    @PutMapping("/sold/{itemId}")
+    public ResponseEntity sold(@PathVariable Long itemId) {
+        return ResponseEntity.status(OK).body(itemService.sold(itemId));
+    }
+
     @GetMapping("/list")
     public ResponseEntity findAll() {
         return ResponseEntity.status(OK).body(itemService.findAll());

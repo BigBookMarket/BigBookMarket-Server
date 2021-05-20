@@ -17,8 +17,13 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/item/{userId}")
-    public ResponseEntity findItem(@PathVariable Long userId) {
-        return ResponseEntity.status(OK).body(userService.findItem(userId));
+    @GetMapping("/sale/{id}")
+    public ResponseEntity findBySellerId(@PathVariable String id) {
+        return ResponseEntity.status(OK).body(userService.findBySellerId(id));
+    }
+
+    @GetMapping("/buy/{id}")
+    public ResponseEntity findByBuyerId(@PathVariable String id) {
+        return ResponseEntity.status(OK).body(userService.findByBuyerId(id));
     }
 }
