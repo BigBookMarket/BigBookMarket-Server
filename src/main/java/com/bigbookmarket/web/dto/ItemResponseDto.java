@@ -10,8 +10,10 @@ import lombok.Getter;
 public class ItemResponseDto {
     private Long itemId;
     private Book book;
-    private Long userId;
-    private String nickname;
+    private String sellerId;
+    private String sellerNickname;
+    private String buyerId;
+    private String buyerNickname;
     private Integer price;
     private ItemTradingMethod method;
     private ItemTradingStatus status;
@@ -21,8 +23,12 @@ public class ItemResponseDto {
     public ItemResponseDto(Item entity) {
         this.itemId = entity.getItemId();
         this.book = entity.getBook();
-        this.userId = entity.getUser().getUserId();
-        this.nickname = entity.getUser().getNickname();
+        this.sellerId = entity.getSeller().getId();
+        this.sellerNickname = entity.getSeller().getNickname();
+        if (entity.getBuyer() != null) {
+            this.buyerId = entity.getBuyer().getId();
+            this.buyerNickname = entity.getBuyer().getNickname();
+        }
         this.price = entity.getPrice();
         this.method = entity.getMethod();
         this.status = entity.getStatus();
