@@ -7,6 +7,9 @@ import java.util.List;
 
 public interface MessageRepository extends JpaRepository<Message, Long> {
 
-//    @Query(value = "SELECT * FROM post p WHERE p.user_id = :userId ORDER BY p.created_date DESC", nativeQuery = true)
-//    List<Post> findByUserId(Long userId);
+    @Query(value = "SELECT * FROM message p WHERE p.receiver_id = :id ORDER BY p.created_date DESC", nativeQuery = true)
+    List<Message> findByInboxId(Long id);
+
+    @Query(value = "SELECT * FROM message p WHERE p.sender_id = :id ORDER BY p.created_date DESC", nativeQuery = true)
+    List<Message> findByOutboxId(Long id);
 }

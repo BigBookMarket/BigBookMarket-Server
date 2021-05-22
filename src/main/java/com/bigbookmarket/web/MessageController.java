@@ -20,9 +20,8 @@ public class MessageController {
         return ResponseEntity.status(OK).body(messageService.save(requestDto));
     }
 
-//    @GetMapping("/list/post/{userId}")
-//    public ResponseEntity findByUserId(@PathVariable Long userId) {
-//        return ResponseEntity.status(OK).body(postService.findByUserId(userId));
-//    }
-
+    @GetMapping("/{messageId}")
+    public ResponseEntity findById(@PathVariable Long messageId) {
+        return ResponseEntity.status(OK).body(messageService.findByMessageId(messageId));
+    }
 }

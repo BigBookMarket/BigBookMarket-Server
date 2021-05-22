@@ -1,6 +1,8 @@
 package com.bigbookmarket.service;
 
+import com.bigbookmarket.domain.Message;
 import com.bigbookmarket.domain.MessageRepository;
+import com.bigbookmarket.domain.Post;
 import com.bigbookmarket.domain.PostRepository;
 import com.bigbookmarket.web.dto.*;
 import lombok.RequiredArgsConstructor;
@@ -21,11 +23,10 @@ public class MessageService {
         return messageRepository.save(requestDto.toEntity()).getMessageId();
     }
 
-//    @Transactional(readOnly = true)
-//    public List<PostCommentHistoryListResponseDto> findByUserIdComment(Long userId) {
-//        return postRepository.findByUserIdComment(userId).stream()
-//                .map(PostCommentHistoryListResponseDto::new)
-//                .collect(Collectors.toList());
-//    }
-//}
+    @Transactional(readOnly = true)
+    public MessageResponseDto findByMessageId(Long messageId) {
+        Message entity = messageRepository.findById(messageId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 Message가 없습니다. messageId=" + messageId));
+        return new MessageResponseDto(entity);
+    }
 }
