@@ -8,16 +8,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MessageSaveRequestDto {
 
-    private Long messageId;
-    private User sender;
-    private User receiver;
+    private Long itemId;
+    private String senderId;
+    private String receiverId;
     private String content;
 
     public Message toEntity() {
         return Message.builder()
-                .messageId(messageId)
-                .sender(User.builder().userId(sender.getUserId()).build())
-                .receiver(User.builder().userId(receiver.getUserId()).build())
+                .item(Item.builder().itemId(itemId).build())
+                .sender(User.builder().id(senderId).build())
+                .receiver(User.builder().id(receiverId).build())
                 .content(content)
                 .build();
     }
