@@ -32,7 +32,7 @@ public class UserController {
         return ResponseEntity.status(OK).body(userService.findByInboxId(id));
     }
 
-    @GetMapping("/outbox/send/{id}")
+    @GetMapping("/outbox/{id}")
     public ResponseEntity findByOutboxId(@PathVariable String id) {
         return ResponseEntity.status(OK).body(userService.findByOutboxId(id));
     }

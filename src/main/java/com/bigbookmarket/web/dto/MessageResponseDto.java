@@ -11,15 +11,15 @@ public class MessageResponseDto {
 
     private Long messageId;
     private Item item;
-    private User sender;
-    private User receiver;
+    private String sender;
+    private String receiver;
     private String content;
 
     public MessageResponseDto(Message entity) {
         this.messageId = entity.getMessageId();
         this.item = entity.getItem();
-        this.sender = entity.getSender();
-        this.receiver = entity.getReceiver();
+        this.sender = entity.getSender().getNickname();
+        this.receiver = entity.getReceiver().getNickname();
         this.content = entity.getContent();
     }
 }

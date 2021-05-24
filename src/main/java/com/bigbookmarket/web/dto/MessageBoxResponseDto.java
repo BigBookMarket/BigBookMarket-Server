@@ -12,7 +12,7 @@ public class MessageBoxResponseDto {
     private String author;
     private String publisher;
     private String pubDate;
-    private String userId;
+    private String nickname;
     private String content;
 
     public MessageBoxResponseDto(Message entity) {
@@ -21,7 +21,7 @@ public class MessageBoxResponseDto {
         this.author = entity.getItem().getBook().getAuthor();
         this.publisher = entity.getItem().getBook().getPublisher();
         this.pubDate = entity.getItem().getBook().getPubDate();
-        this.userId = entity.getSender().getNickname();
+        this.nickname = entity.getSender().getNickname();
         this.content = entity.getContent();
     }
 }
