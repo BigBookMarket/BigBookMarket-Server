@@ -51,9 +51,9 @@ public class PostService {
                 .collect(Collectors.toList());
     }
 
-    @Transactional(readOnly = true)
-    public PostListResponseDto findByBookId(String bookId) {
-        List<Post> entity = new ArrayList<>(postRepository.findByBookId(bookId));
-        return new PostListResponseDto(entity);
-    }
+//    @Transactional(readOnly = true)
+//    public PostListResponseDto findByBookId(String bookId) {
+//        List<Post> entity = new ArrayList<>(postRepository.findByBookId(bookId));
+//        return new PostListResponseDto(entity);
+//    }
 }

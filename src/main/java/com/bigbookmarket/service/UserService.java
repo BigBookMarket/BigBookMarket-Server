@@ -4,7 +4,7 @@ import com.bigbookmarket.domain.ItemRepository;
 import com.bigbookmarket.domain.MessageRepository;
 import com.bigbookmarket.domain.UserRepository;
 import com.bigbookmarket.web.dto.ItemListResponseDto;
-import com.bigbookmarket.web.dto.MessageBoxResponseDto;
+import com.bigbookmarket.web.dto.MessageResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,18 +37,18 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public List<MessageBoxResponseDto> findByInboxId(String id) {
+    public List<MessageResponseDto> findByInboxId(String id) {
         Long inboxId = userRepository.findById(id).get().getUserId(); // TODO: 에러처리
         return messageRepository.findByInboxId(inboxId).stream()
-                .map(MessageBoxResponseDto::new)
+                .map(MessageResponseDto::new)
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
-    public List<MessageBoxResponseDto> findByOutboxId(String id) {
+    public List<MessageResponseDto> findByOutboxId(String id) {
         Long outboxId = userRepository.findById(id).get().getUserId(); // TODO: 에러처리
         return messageRepository.findByOutboxId(outboxId).stream()
-                .map(MessageBoxResponseDto::new)
+                .map(MessageResponseDto::new)
                 .collect(Collectors.toList());
     }
 }

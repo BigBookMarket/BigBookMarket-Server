@@ -42,10 +42,10 @@ public class PostController {
 //        return ResponseEntity.status(OK).body(postService.findAllDesc());
 //    }
 
-    @GetMapping("/list/{bookId}")
-    public ResponseEntity findByBookId(@PathVariable String bookId) {
-        return ResponseEntity.status(OK).body(postService.findByBookId(bookId));
-    }
+//    @GetMapping("/list/{bookId}")
+//    public ResponseEntity findByBookId(@PathVariable String bookId) {
+//        return ResponseEntity.status(OK).body(postService.findByBookId(bookId));
+//    }
 
     @GetMapping("/list/user/{userId}")
     public ResponseEntity findByUserId(@PathVariable Long userId) {
