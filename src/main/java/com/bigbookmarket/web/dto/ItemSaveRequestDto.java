@@ -9,16 +9,16 @@ import lombok.NoArgsConstructor;
 public class ItemSaveRequestDto {
 
     private Book book;
-    private Long sellerId;
+    private String id;
     private Integer price;
     private ItemTradingMethod method;
     private ItemTradingStatus status;
     private String detail;
 
-    public Item toEntity() {
+    public Item toEntity(User user) {
         return Item.builder()
                 .book(book)
-                .seller(User.builder().userId(sellerId).build())
+                .seller(user)
                 .price(price)
                 .method(method)
                 .status(status)

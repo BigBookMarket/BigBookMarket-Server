@@ -26,7 +26,9 @@ public class ItemService {
     public Long save(ItemSaveRequestDto requestDto) {
         // TODO: 있으면 그대로, 없으면 insert 되는지 확인해보기
         bookRepository.save(requestDto.getBook());
-        return itemRepository.save(requestDto.toEntity()).getItemId();
+        User user = userRepository.findById(requestDto.getId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 User가 없습니다. id = " + requestDto.getId()));
+        return itemRepository.save(requestDto.toEntity(user)).getItemId();
     }
 
     @Transactional
