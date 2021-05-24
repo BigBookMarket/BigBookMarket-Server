@@ -1,13 +1,11 @@
 package com.bigbookmarket.service;
 
 import com.bigbookmarket.domain.*;
-import com.bigbookmarket.web.dto.*;
+import com.bigbookmarket.web.dto.MessageResponseDto;
+import com.bigbookmarket.web.dto.MessageSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -19,13 +17,13 @@ public class MessageService {
 
     @Transactional
     public Long save(MessageSaveRequestDto requestDto) {
-        Item itemId = itemRepository.findById(requestDto.getItemId())
-                .orElseThrow(() -> new IllegalArgumentException("해당 Item이 없습니다. itemid=" + requestDto.getItemId()));
-        User senderId = userRepository.findById(requestDto.getSenderId())
-                .orElseThrow(() -> new IllegalArgumentException("해당 Sender가 없습니다. senderid=" + requestDto.getSenderId()));
-        User receiverId = userRepository.findById(requestDto.getSenderId())
-                .orElseThrow(() -> new IllegalArgumentException("해당 Receiver가 없습니다. receiverid=" + requestDto.getReceiverId()));
-        return messageRepository.save(requestDto.toEntity(itemId, senderId, receiverId)).getMessageId();
+        Item item = itemRepository.findById(requestDto.getItemId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 Item이 없습니다. itemId=" + requestDto.getItemId()));
+        User sender = userRepository.findById(requestDto.getSenderId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 Sender가 없습니다. senderId=" + requestDto.getSenderId()));
+        User receiver = userRepository.findById(requestDto.getReceiverId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 Receiver가 없습니다. receiverId=" + requestDto.getReceiverId()));
+        return messageRepository.save(requestDto.toEntity(item, sender, receiver)).getMessageId();
     }
 
     @Transactional(readOnly = true)

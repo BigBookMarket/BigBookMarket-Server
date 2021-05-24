@@ -1,6 +1,8 @@
 package com.bigbookmarket.web.dto;
 
-import com.bigbookmarket.domain.*;
+import com.bigbookmarket.domain.Item;
+import com.bigbookmarket.domain.Message;
+import com.bigbookmarket.domain.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,9 +15,9 @@ public class MessageSaveRequestDto {
     private String receiverId;
     private String content;
 
-    public Message toEntity(Item itemId, User sender, User receiver) {
+    public Message toEntity(Item item, User sender, User receiver) {
         return Message.builder()
-                .item(itemId)
+                .item(item)
                 .sender(sender)
                 .receiver(receiver)
                 .content(content)
