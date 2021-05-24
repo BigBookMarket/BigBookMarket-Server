@@ -13,11 +13,11 @@ public class MessageSaveRequestDto {
     private String receiverId;
     private String content;
 
-    public Message toEntity() {
+    public Message toEntity(Item itemId, User sender, User receiver) {
         return Message.builder()
-                .item(Item.builder().itemId(itemId).build())
-                .sender(User.builder().id(senderId).build())
-                .receiver(User.builder().id(receiverId).build())
+                .item(itemId)
+                .sender(sender)
+                .receiver(receiver)
                 .content(content)
                 .build();
     }
