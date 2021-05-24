@@ -37,14 +37,19 @@ public class PostController {
         return ResponseEntity.status(OK).body(postService.findById(postId));
     }
 
-    @GetMapping("/list")
-    public ResponseEntity findAllDesc() {
-        return ResponseEntity.status(OK).body(postService.findAllDesc());
-    }
+//    @GetMapping("/list")
+//    public ResponseEntity findAllDesc() {
+//        return ResponseEntity.status(OK).body(postService.findAllDesc());
+//    }
 
-    @GetMapping("/list/{bookId}")
-    public ResponseEntity findByBookId(@PathVariable String bookId) {
-        return ResponseEntity.status(OK).body(postService.findByBookId(bookId));
+//    @GetMapping("/list/{bookId}")
+//    public ResponseEntity findByBookId(@PathVariable String bookId) {
+//        return ResponseEntity.status(OK).body(postService.findByBookId(bookId));
+//    }
+
+    @GetMapping("/list/user/{userId}")
+    public ResponseEntity findByUserId(@PathVariable Long userId) {
+        return ResponseEntity.status(OK).body(postService.findByUserId(userId));
     }
 
 //    TODO: 마이페이지에서 내가 작성한 post 전체 보여주기

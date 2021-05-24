@@ -26,4 +26,14 @@ public class UserController {
     public ResponseEntity findByBuyerId(@PathVariable String id) {
         return ResponseEntity.status(OK).body(userService.findByBuyerId(id));
     }
+
+    @GetMapping("/inbox/{id}")
+    public ResponseEntity findByInboxId(@PathVariable String id) {
+        return ResponseEntity.status(OK).body(userService.findByInboxId(id));
+    }
+
+    @GetMapping("/outbox/{id}")
+    public ResponseEntity findByOutboxId(@PathVariable String id) {
+        return ResponseEntity.status(OK).body(userService.findByOutboxId(id));
+    }
 }
