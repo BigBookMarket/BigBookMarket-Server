@@ -20,4 +20,8 @@ public class AuthenticationResponse {
     private Instant expiresAt;
 
     private String id;
+
+    private String phone;
+
+    private String nickname;
 }

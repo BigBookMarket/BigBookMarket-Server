@@ -70,6 +70,8 @@ public class AuthService {
     }
 
     public AuthenticationResponse login(LoginRequest loginRequest) {
+        User user = userRepository.findById(loginRequest.getId())
+                .orElseThrow(() -> new BigBookMarketException("존재하지 않는 id입니다. id=" + loginRequest.getId()));
         Authentication authenticate = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getId(), loginRequest.getPwd()));
         SecurityContextHolder.getContext().setAuthentication(authenticate);
@@ -79,6 +81,8 @@ public class AuthService {
                 .refreshToken(refreshTokenService.generateRefreshToken().getToken())
                 .expiresAt(Instant.now().plusMillis(jwtProvider.getJwtExpirationInMillis()))
                 .id(loginRequest.getId())
+                .phone(user.getPhone())
+                .nickname(user.getNickname())
                 .build();
     }
 
