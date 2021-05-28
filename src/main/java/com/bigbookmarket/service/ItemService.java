@@ -21,6 +21,7 @@ public class ItemService {
     private final UserRepository userRepository;
     private final BookRepository bookRepository;
     private final ItemRepository itemRepository;
+    private final MessageRepository messageRepository;
 
     @Transactional
     public Long save(ItemSaveRequestDto requestDto) {
@@ -59,6 +60,13 @@ public class ItemService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 Item이 없습니다. itemId = " + itemId));
         User buyer = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 User가 없습니다. id = " + id));
+        Message message = Message.builder()
+                .item(item)
+                .sender(buyer)
+                .receiver(item.getSeller())
+                .content("[대책마켓 발신]\n구매자 " + buyer.getNickname() + "님이 거래를 신청하셨습니다.")
+                .build();
+        messageRepository.save(message);
         item.deal(buyer);
         return itemId;
     }
@@ -67,13 +75,23 @@ public class ItemService {
     public Long cancel(Long itemId, String id) {
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 Item이 없습니다. itemId = " + itemId));
+        Message message;
         if (id.equals(item.getSeller().getId())) {
-            // TODO: 판매자가 취소한 경우 구매자에게 취소 쪽지 발송
-            log.info("구매자 " + item.getBuyer().getId() + "에게 취소쪽지 발송");
+            message = Message.builder()
+                    .item(item)
+                    .sender(item.getSeller())
+                    .receiver(item.getBuyer())
+                    .content("[대책마켓 발신]\n판매자 " + item.getSeller().getNickname() + "님이 거래를 취소하셨습니다.")
+                    .build();
         } else {
-            // TODO: 구매자가 취소한 경우 판매자에게 취소 쪽지 발송
-            log.info("판매자 " + item.getSeller().getId() + "에게 취소쪽지 발송");
+            message = Message.builder()
+                    .item(item)
+                    .sender(item.getBuyer())
+                    .receiver(item.getSeller())
+                    .content("[대책마켓 발신]\n구매자 " + item.getBuyer().getNickname() + "님이 거래를 취소하셨습니다.")
+                    .build();
         }
+        messageRepository.save(message);
         item.cancel();
         return itemId;
     }
@@ -82,8 +100,13 @@ public class ItemService {
     public Long sold(Long itemId) {
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 Item이 없습니다. itemId = " + itemId));
-        // TODO: 판매자에게 거래 완료 쪽지 발송
-        log.info("판매자 " + item.getSeller().getId() + "에게 거래 완료 쪽지 발송");
+        Message message = Message.builder()
+                .item(item)
+                .sender(item.getBuyer())
+                .receiver(item.getSeller())
+                .content("[대책마켓 발신]\n구매자 " + item.getBuyer().getNickname() + "님이 거래를 완료하셨습니다.")
+                .build();
+        messageRepository.save(message);
         item.sold();
         return itemId;
     }
