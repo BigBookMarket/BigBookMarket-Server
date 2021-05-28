@@ -62,7 +62,7 @@ public class ItemService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 User가 없습니다. id = " + id));
         Message message = Message.builder()
                 .item(item)
-                .sender(item.getBuyer())
+                .sender(buyer)
                 .receiver(item.getSeller())
                 .content("[대책마켓 발신]\n구매자 " + buyer.getNickname() + "님이 거래를 신청하셨습니다.")
                 .build();
