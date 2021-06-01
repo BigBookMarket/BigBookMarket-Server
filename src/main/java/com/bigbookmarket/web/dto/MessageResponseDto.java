@@ -2,7 +2,10 @@ package com.bigbookmarket.web.dto;
 
 import com.bigbookmarket.domain.Book;
 import com.bigbookmarket.domain.Message;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
+
+import java.time.LocalDateTime;
 
 @Getter
 public class MessageResponseDto {
@@ -14,7 +17,9 @@ public class MessageResponseDto {
     private String senderNickname;
     private String receiverNickname;
     private String content;
-    private String createdDate;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+    private LocalDateTime createdDate;
 
     public MessageResponseDto(Message entity) {
         this.messageId = entity.getMessageId();
@@ -24,6 +29,6 @@ public class MessageResponseDto {
         this.senderNickname = entity.getSender().getNickname();
         this.receiverNickname = entity.getReceiver().getNickname();
         this.content = entity.getContent();
-        this.createdDate = entity.getCreatedDate().toString();
+        this.createdDate = entity.getCreatedDate();
     }
 }
