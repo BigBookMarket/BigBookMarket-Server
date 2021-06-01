@@ -4,7 +4,10 @@ import com.bigbookmarket.domain.Book;
 import com.bigbookmarket.domain.Item;
 import com.bigbookmarket.domain.ItemTradingMethod;
 import com.bigbookmarket.domain.ItemTradingStatus;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
+
+import java.time.LocalDateTime;
 
 @Getter
 public class ItemResponseDto {
@@ -18,7 +21,9 @@ public class ItemResponseDto {
     private ItemTradingMethod method;
     private ItemTradingStatus status;
     private String detail;
-    private String createdDate;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+    private LocalDateTime createdDate;
 
     public ItemResponseDto(Item entity) {
         this.itemId = entity.getItemId();
@@ -33,6 +38,6 @@ public class ItemResponseDto {
         this.method = entity.getMethod();
         this.status = entity.getStatus();
         this.detail = entity.getDetail();
-        this.createdDate = entity.getCreatedDate().toString();
+        this.createdDate = entity.getCreatedDate();
     }
 }
