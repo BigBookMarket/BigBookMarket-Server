@@ -22,7 +22,7 @@ public class ItemListResponseDto {
     private ItemTradingMethod method;
     private ItemTradingStatus status;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdDate;
 
     public ItemListResponseDto(Item entity) {
