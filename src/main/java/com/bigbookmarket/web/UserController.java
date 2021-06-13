@@ -36,4 +36,14 @@ public class UserController {
     public ResponseEntity findByOutboxId(@PathVariable String id) {
         return ResponseEntity.status(OK).body(userService.findByOutboxId(id));
     }
+
+    @GetMapping("/post/{id}")
+    public ResponseEntity findPostById(@PathVariable String id) {
+        return ResponseEntity.status(OK).body(userService.findPostById(id));
+    }
+
+    @GetMapping("/comment/{id}")
+    public ResponseEntity findCommentById(@PathVariable String id) {
+        return ResponseEntity.status(OK).body(userService.findCommentById(id));
+    }
 }

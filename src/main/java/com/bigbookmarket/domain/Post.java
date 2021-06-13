@@ -39,9 +39,6 @@ public class Post extends BaseTimeEntity {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<Comment> comment = new ArrayList<>();
-
     public void update(String title, String content) {
         this.title = title;
         this.content = content;
