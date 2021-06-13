@@ -16,13 +16,16 @@ import java.util.stream.Collectors;
 @Service
 public class PostService {
 
+    private final UserRepository userRepository;
     private final BookRepository bookRepository;
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
 
     @Transactional
     public Long save(PostSaveRequestDto requestDto) {
-        return postRepository.save(requestDto.toEntity()).getPostId();
+        User user = userRepository.findById(requestDto.getId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 User가 없습니다. id = " + requestDto.getId()));
+        return postRepository.save(requestDto.toEntity(user)).getPostId();
     }
 
     @Transactional
