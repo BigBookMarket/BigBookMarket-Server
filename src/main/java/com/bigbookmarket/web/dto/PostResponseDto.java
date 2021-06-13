@@ -21,7 +21,7 @@ public class PostResponseDto {
     private String title;
     private PostCategory category;
     private String content;
-    private Integer count;
+    private Integer commentCount;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdDate;
@@ -53,7 +53,7 @@ public class PostResponseDto {
         this.category = entity.getCategory();
         this.content = entity.getContent();
         this.createdDate = entity.getCreatedDate();
-        this.count = commentList.size();
+        this.commentCount = commentList.size();
         this.commentList = commentList;
     }
 }
