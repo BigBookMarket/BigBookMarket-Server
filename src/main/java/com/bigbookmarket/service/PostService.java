@@ -1,13 +1,14 @@
 package com.bigbookmarket.service;
 
-import com.bigbookmarket.domain.Post;
-import com.bigbookmarket.domain.PostRepository;
-import com.bigbookmarket.web.dto.*;
+import com.bigbookmarket.domain.*;
+import com.bigbookmarket.web.dto.PostListResponseDto;
+import com.bigbookmarket.web.dto.PostResponseDto;
+import com.bigbookmarket.web.dto.PostSaveRequestDto;
+import com.bigbookmarket.web.dto.PostUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,7 +16,9 @@ import java.util.stream.Collectors;
 @Service
 public class PostService {
 
+    private final BookRepository bookRepository;
     private final PostRepository postRepository;
+    private final CommentRepository commentRepository;
 
     @Transactional
     public Long save(PostSaveRequestDto requestDto) {
@@ -41,19 +44,19 @@ public class PostService {
     public PostResponseDto findById(Long postId) {
         Post entity = postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 Post가 없습니다. postId=" + postId));
-        return new PostResponseDto(entity);
+        List<PostResponseDto.CommentList> commentList = commentRepository.findByPost_PostIdOrderByCreatedDateDesc(postId).stream()
+                .map(comment -> new PostResponseDto().new CommentList(comment))
+                .collect(Collectors.toList());
+        return new PostResponseDto(entity, commentList);
     }
 
     @Transactional(readOnly = true)
-    public List<PostHistoryListResponseDto> findByUserId(Long userId) {
-        return postRepository.findByUserId(userId).stream()
-                .map(PostHistoryListResponseDto::new)
+    public PostListResponseDto findByBookId(String bookId) {
+        Book entity = bookRepository.findById(bookId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 Book이 없습니다. bookId=" + bookId));
+        List<PostListResponseDto.PostList> postList = postRepository.findByBook_BookIdOrderByCreatedDateDesc(bookId).stream()
+                .map(post -> new PostListResponseDto().new PostList(post))
                 .collect(Collectors.toList());
+        return new PostListResponseDto(entity, postList);
     }
-
-//    @Transactional(readOnly = true)
-//    public PostListResponseDto findByBookId(String bookId) {
-//        List<Post> entity = new ArrayList<>(postRepository.findByBookId(bookId));
-//        return new PostListResponseDto(entity);
-//    }
 }
