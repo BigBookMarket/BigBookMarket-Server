@@ -20,7 +20,12 @@ public class BookController {
 
     private final BookService bookService;
 
-    @GetMapping("/{category}")
+    @GetMapping("/list")
+    public ResponseEntity findAll() {
+        return ResponseEntity.status(OK).body(bookService.findAll());
+    }
+
+    @GetMapping("/list/{category}")
     public ResponseEntity findByCategory(@PathVariable String category) {
         List<BookListResponseDto> list = bookService.findByCategory(category);
         return ResponseEntity.status(OK).body(list);
