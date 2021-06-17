@@ -37,10 +37,11 @@ public class PostService {
     }
 
     @Transactional
-    public void delete(Long postId) {
+    public Long delete(Long postId) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 Post가 없습니다. postId=" + postId));
         postRepository.delete(post);
+        return postId;
     }
 
     @Transactional(readOnly = true)

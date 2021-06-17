@@ -29,4 +29,8 @@ public class Comment extends BaseTimeEntity {
 
     @Column(columnDefinition = "VARCHAR(500)", nullable = false)
     private String content;
+
+    public void update(String content) {
+        this.content = content;
+    }
 }
