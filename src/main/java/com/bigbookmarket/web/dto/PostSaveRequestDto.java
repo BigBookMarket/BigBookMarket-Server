@@ -10,8 +10,9 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class PostSaveRequestDto {
+
     private String id;
-    private String bookId;
+    private Book book;
     private PostCategory category;
     private String title;
     private String content;
@@ -19,7 +20,7 @@ public class PostSaveRequestDto {
     public Post toEntity(User user) {
         return Post.builder()
                 .user(user)
-                .book(Book.builder().bookId(bookId).build())
+                .book(book)
                 .category(category)
                 .title(title)
                 .content(content)
