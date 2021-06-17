@@ -29,8 +29,7 @@ public class ItemController {
 
     @DeleteMapping("/{itemId}")
     public ResponseEntity delete(@PathVariable Long itemId) {
-        itemService.delete(itemId);
-        return ResponseEntity.status(OK).body(itemId);
+        return ResponseEntity.status(OK).body(itemService.delete(itemId));
     }
 
     @GetMapping("/{itemId}")

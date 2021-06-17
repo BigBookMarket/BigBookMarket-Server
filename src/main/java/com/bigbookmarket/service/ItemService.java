@@ -41,10 +41,11 @@ public class ItemService {
     }
 
     @Transactional
-    public void delete(Long itemId) {
+    public Long delete(Long itemId) {
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 Item이 없습니다. itemId = " + itemId));
         itemRepository.delete(item);
+        return itemId;
     }
 
     @Transactional(readOnly = true)
