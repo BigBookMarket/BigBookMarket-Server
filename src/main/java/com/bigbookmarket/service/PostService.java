@@ -23,6 +23,7 @@ public class PostService {
 
     @Transactional
     public Long save(PostSaveRequestDto requestDto) {
+        bookRepository.save(requestDto.getBook());
         User user = userRepository.findById(requestDto.getId())
                 .orElseThrow(() -> new IllegalArgumentException("해당 User가 없습니다. id = " + requestDto.getId()));
         return postRepository.save(requestDto.toEntity(user)).getPostId();
