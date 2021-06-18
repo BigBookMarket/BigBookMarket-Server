@@ -8,9 +8,6 @@ import java.util.Map;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    @Query(value = "SELECT * FROM post p WHERE p.user_id = :userId ORDER BY p.created_date DESC", nativeQuery = true)
-    List<Post> findByUserId(Long userId);
-
     @Query(value = "SELECT b.book_id, b.author, b.category, convert(b.image, CHAR(70)) as image, b.price_standard, b.pub_date, b.publisher, b.title,\n" +
             "p.post_id, p.created_date, p.category as post_category, p.content, p.title as post_title,\n" +
             "(SELECT count(*) FROM comment c WHERE p.post_id = c.post_id) as comment_count\n" +
