@@ -25,7 +25,7 @@ public class UserService {
     @Transactional(readOnly = true)
     public List<ItemListResponseDto> findBySellerId(String id) {
         Long sellerId = userRepository.findById(id).get().getUserId(); // TODO: 에러처리
-        return itemRepository.findBySellerId(sellerId).stream()
+        return itemRepository.findBySellerId(sellerId, ItemTradingStatus.DELETE).stream()
                 .map(ItemListResponseDto::new)
                 .collect(Collectors.toList());
     }
@@ -33,7 +33,7 @@ public class UserService {
     @Transactional(readOnly = true)
     public List<ItemListResponseDto> findByBuyerId(String id) {
         Long buyerId = userRepository.findById(id).get().getUserId(); // TODO: 에러처리
-        return itemRepository.findByBuyerId(buyerId).stream()
+        return itemRepository.findByBuyerId(buyerId, ItemTradingStatus.DELETE).stream()
                 .map(ItemListResponseDto::new)
                 .collect(Collectors.toList());
     }
