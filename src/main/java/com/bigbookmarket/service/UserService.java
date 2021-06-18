@@ -24,23 +24,23 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public List<ItemListResponseDto> findBySellerId(String id) {
-        Long sellerId = userRepository.findById(id).get().getUserId(); // TODO: 에러처리
-        return itemRepository.findBySellerId(sellerId, ItemTradingStatus.DELETE).stream()
+        Long sellerId = userRepository.findById(id).get().getUserId();
+        return itemRepository.findBySellerId(sellerId).stream()
                 .map(ItemListResponseDto::new)
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
     public List<ItemListResponseDto> findByBuyerId(String id) {
-        Long buyerId = userRepository.findById(id).get().getUserId(); // TODO: 에러처리
-        return itemRepository.findByBuyerId(buyerId, ItemTradingStatus.DELETE).stream()
+        Long buyerId = userRepository.findById(id).get().getUserId();
+        return itemRepository.findByBuyerId(buyerId).stream()
                 .map(ItemListResponseDto::new)
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
     public List<MessageResponseDto> findByInboxId(String id) {
-        Long inboxId = userRepository.findById(id).get().getUserId(); // TODO: 에러처리
+        Long inboxId = userRepository.findById(id).get().getUserId();
         return messageRepository.findByInboxId(inboxId).stream()
                 .map(MessageResponseDto::new)
                 .collect(Collectors.toList());
@@ -48,7 +48,7 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public List<MessageResponseDto> findByOutboxId(String id) {
-        Long outboxId = userRepository.findById(id).get().getUserId(); // TODO: 에러처리
+        Long outboxId = userRepository.findById(id).get().getUserId();
         return messageRepository.findByOutboxId(outboxId).stream()
                 .map(MessageResponseDto::new)
                 .collect(Collectors.toList());
@@ -56,7 +56,7 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public List<UserPostListResponseDto> findPostById(String id) {
-        Long userId = userRepository.findById(id).get().getUserId(); // TODO: 에러처리
+        Long userId = userRepository.findById(id).get().getUserId();
         return postRepository.findByUser_userIdOrderByCreatedDateDesc(userId).stream()
                 .map(UserPostListResponseDto::new)
                 .collect(Collectors.toList());
@@ -64,7 +64,7 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public List<CommentListResponseDto> findCommentById(String id) {
-        Long userId = userRepository.findById(id).get().getUserId(); // TODO: 에러처리
+        Long userId = userRepository.findById(id).get().getUserId();
         return commentRepository.findByUser_userIdOrderByCreatedDateDesc(userId).stream()
                 .map(CommentListResponseDto::new)
                 .collect(Collectors.toList());

@@ -122,14 +122,14 @@ public class ItemService {
 
     @Transactional(readOnly = true)
     public List<ItemListResponseDto> findAll() {
-        return itemRepository.findAll(ItemTradingStatus.DELETE).stream()
+        return itemRepository.findAll().stream()
                 .map(ItemListResponseDto::new)
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
     public List<ItemListResponseDto> findByCategory(String category) {
-        return itemRepository.findByCategory(category, ItemTradingStatus.DELETE).stream()
+        return itemRepository.findByCategory(category).stream()
                 .map(ItemListResponseDto::new)
                 .collect(Collectors.toList());
     }
