@@ -64,4 +64,8 @@ public class Item extends BaseTimeEntity {
     public void sold() {
         this.status = ItemTradingStatus.SOLD;
     }
+
+    public void delete() {
+        this.status = ItemTradingStatus.DELETE;
+    }
 }

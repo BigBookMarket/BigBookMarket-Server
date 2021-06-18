@@ -4,5 +4,5 @@ import lombok.Getter;
 
 @Getter
 public enum ItemTradingStatus {
-    SALE, DEAL, SOLD;
+    SALE, DEAL, SOLD, DELETE;
 }

@@ -25,7 +25,6 @@ public class ItemService {
 
     @Transactional
     public Long save(ItemSaveRequestDto requestDto) {
-        // TODO: 있으면 그대로, 없으면 insert 되는지 확인해보기
         bookRepository.save(requestDto.getBook());
         User user = userRepository.findById(requestDto.getId())
                 .orElseThrow(() -> new IllegalArgumentException("해당 User가 없습니다. id = " + requestDto.getId()));
@@ -44,7 +43,16 @@ public class ItemService {
     public Long delete(Long itemId) {
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 Item이 없습니다. itemId = " + itemId));
-        itemRepository.delete(item);
+        if (item.getBuyer() != null) {
+            Message message = Message.builder()
+                    .item(item)
+                    .sender(item.getSeller())
+                    .receiver(item.getBuyer())
+                    .content("[대책마켓 발신]\n판매자 " + item.getSeller().getNickname() + "님이 거래를 삭제하셨습니다.")
+                    .build();
+            messageRepository.save(message);
+        }
+        item.delete();
         return itemId;
     }
 
@@ -114,14 +122,14 @@ public class ItemService {
 
     @Transactional(readOnly = true)
     public List<ItemListResponseDto> findAll() {
-        return itemRepository.findAll().stream()
+        return itemRepository.findAll(ItemTradingStatus.DELETE).stream()
                 .map(ItemListResponseDto::new)
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
     public List<ItemListResponseDto> findByCategory(String category) {
-        return itemRepository.findByCategory(category).stream()
+        return itemRepository.findByCategory(category, ItemTradingStatus.DELETE).stream()
                 .map(ItemListResponseDto::new)
                 .collect(Collectors.toList());
     }
